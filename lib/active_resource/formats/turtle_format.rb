@@ -17,11 +17,22 @@ class ActiveResource::Formats::TurtleFormat
     graph = RDF::Graph.new
     graph.from_ttl(ttl)
 
-    h = Hash[model.schema.map do |k, v|
-      [
-        k, 
-        graph.query(predicate: v['predicate']).map { |x| x.object }.first
-      ]
-    end]
+    h = {}
+    model.schema.each do |k, v|
+      h[k] = graph.query(predicate: v['predicate']).map { |x| x.object }.first
+    end
+    
+    h[:member_ids] = members(graph)
+
+    h[:graph] = graph
+    
+    h
+  end
+  
+  private
+  def members graph
+      graph.query(predicate: 
+          graph.query(predicate: RDF::URI("http://www.w3.org/ns/ldp#hasMemberRelation")).map { |x| x.object }.first
+      ).map { |x| x.object.to_s }
   end
 end

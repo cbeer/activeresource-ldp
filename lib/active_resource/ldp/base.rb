@@ -1,5 +1,8 @@
 require 'active_resource'
 class ActiveResource::Ldp::Base < ActiveResource::Base
+
+  extend ActiveResource::Ldp::Associations
+    
   class_attribute :include_format_in_path
   self.include_format_in_path = false
 
@@ -42,10 +45,6 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
       end
     end
     
-    def element_name
-      @element_name ||= ''
-    end
-    
     def collection_name
       @collection_name ||= ''
     end
@@ -69,6 +68,28 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
       prefix_options, query_options = split_options(prefix_options) if query_options.nil?
       "#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape real_id.to_s}#{format_extension}#{query_string(query_options)}"
     end
+
+    # Find every resource
+    def find_every(options)
+      puts options.inspect
+      begin
+        case from = options[:from]
+        when Symbol
+          instantiate_collection(get(from, options[:params]), options[:params])
+        when String
+          path = "#{from}#{query_string(options[:params])}"
+          instantiate_collection(format.decode(connection.get(path, headers).body) || [], options[:params])
+        else
+          prefix_options, query_options = split_options(options[:params])
+          path = collection_path(prefix_options, query_options)
+          instantiate_collection( (format.decode(connection.get(path, headers).body) || []), query_options, prefix_options )
+        end
+      rescue ActiveResource::ResourceNotFound
+        # Swallowing ResourceNotFound exceptions and return nil - as per
+        # ActiveRecord.
+        nil
+      end
+    end
   end
   
   def encode options = {}
@@ -76,7 +97,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     #else
       graph = RDF::Graph.new
       
-      attributes.except(:id).each do |k,v|
+      attributes.except(:id, :graph).each do |k,v|
         Array(v).each do |val|
           graph << [RDF::URI(''), schema[k]['predicate'], val]
         end
@@ -87,8 +108,9 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   
   schema do
     attribute 'uuid', :string, predicate: RDF::URI('http://fedora.info/definitions/v4/repository#uuid')
+    attribute 'graph', nil
   end
-  
+
   protected
   # Create (i.e., \save to the remote service) the \new resource.
   def create
