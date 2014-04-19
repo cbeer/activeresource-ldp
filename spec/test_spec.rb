@@ -7,8 +7,10 @@ describe "ActiveRecord::Ldp" do
 
     class SomeModel < ActiveResource::Ldp::Base
       self.site = "http://localhost:8080/rest/"
+      belongs_to :parent, class_name: "SomeModel"
       schema do
         attribute 'title', :string, predicate: RDF::DC.title
+        attribute 'parent_id', :string, predicate: RDF::URI("http://fedora.info/definitions/v4/repository#hasParent")
       end
     end
   end
@@ -18,6 +20,7 @@ describe "ActiveRecord::Ldp" do
     SomeModel.delete 'xyz1' rescue nil
     SomeModel.delete 'xyz2' rescue nil
     SomeModel.delete 'abc/def/ghi' rescue nil
+    SomeModel.delete 'a/b/c' rescue nil
   end
 
   it "should work" do
@@ -54,5 +57,13 @@ describe "ActiveRecord::Ldp" do
     m = SomeModel.new(id: 'abc/def/ghi')
     m.save!
     expect(m.id).to eq 'abc/def/ghi'
+  end
+  
+  it "should work" do
+    m = SomeModel.new(id: 'a/b/c')
+    m.save!
+    expect(m.parent).to_not be_blank
+    expect(m.parent).to eq SomeModel.find('a/b')
+    
   end
 end

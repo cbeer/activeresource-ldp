@@ -50,7 +50,15 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     end
     
     def headers
-      super.merge({ "Prefer" => "return=minimal"})
+      super.merge({ "Prefer" => "return=representation; omit=\"#{::Ldp.prefer_containment}\""})
+    end
+    
+    def element_path(id, prefix_options = {}, query_options = nil)
+      real_id = id.to_s.sub(site.to_s, "")
+      check_prefix_options(prefix_options)
+
+      prefix_options, query_options = split_options(prefix_options) if query_options.nil?
+      "#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape real_id.to_s}#{format_extension}#{query_string(query_options)}"
     end
   end
   
