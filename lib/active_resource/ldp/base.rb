@@ -25,6 +25,15 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
       end
     end
     
+    def schema_from_vocabulary vocab
+      vocab.public_methods(false).
+            select { |x| vocab.properties.include?((vocab.send(x) rescue nil)) }.
+            each do |k|
+        schema[k] = { type: nil, predicate: vocab.send(k) }      
+      end
+      
+    end
+    
     def default_schema
       if self == ActiveResource::Ldp::Base
         {}.with_indifferent_access
@@ -94,7 +103,11 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   
   def instance_headers
     h = { }
-    h['Slug'] = attributes['id'] if attributes['id']
+    h['Slug'] = slug if slug
     h
+  end
+  
+  def slug
+    attributes['id'] if attributes['id']
   end
 end

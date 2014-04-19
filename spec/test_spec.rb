@@ -13,6 +13,11 @@ describe "ActiveRecord::Ldp" do
         attribute 'parent_id', :string, predicate: RDF::URI("http://fedora.info/definitions/v4/repository#hasParent")
       end
     end
+    
+    class FoafModel < ActiveResource::Ldp::Base
+      self.site = "http://localhost:8080/rest/foafs"
+      schema_from_vocabulary RDF::FOAF
+    end
   end
   
   after(:all) do
@@ -21,6 +26,7 @@ describe "ActiveRecord::Ldp" do
     SomeModel.delete 'xyz2' rescue nil
     SomeModel.delete 'abc/def/ghi' rescue nil
     SomeModel.delete 'a/b/c' rescue nil
+    SomeModel.delete 'foafs' rescue nil
   end
 
   it "should work" do
@@ -64,6 +70,15 @@ describe "ActiveRecord::Ldp" do
     m.save!
     expect(m.parent).to_not be_blank
     expect(m.parent).to eq SomeModel.find('a/b')
-    
+  end
+  
+  it "should work" do
+    SomeModel.create(id: 'foafs')
+  
+    m = FoafModel.new
+    m.lastName = "Smith"
+    m.save!
+    m.reload
+    expect(m.lastName).to eq "Smith"
   end
 end
