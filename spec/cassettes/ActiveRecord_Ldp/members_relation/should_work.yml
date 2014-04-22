@@ -1,0 +1,374 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:8080/rest/
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - text/turtle
+      Prefer:
+      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      Slug:
+      - parent
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Etag:
+      - '"49c83897987d9134d77fd932f29576213cb7cd33"'
+      Last-Modified:
+      - Tue, 22 Apr 2014 16:42:42 GMT
+      Location:
+      - http://localhost:8080/rest/parent
+      Content-Type:
+      - text/plain
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(8.1.11.v20130520)
+    body:
+      encoding: UTF-8
+      string: http://localhost:8080/rest/parent
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 16:42:42 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/rest//parent
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle
+      Prefer:
+      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"49c83897987d9134d77fd932f29576213cb7cd33"'
+      Last-Modified:
+      - Tue, 22 Apr 2014 16:42:42 GMT
+      Preference-Applied:
+      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
+      Vary:
+      - Prefer
+      Accept-Patch:
+      - application/sparql-update
+      Link:
+      - http://www.w3.org/ns/ldp#DirectContainer;rel="type"
+      - http://www.w3.org/ns/ldp#Resource;rel="type"
+      Content-Type:
+      - text/turtle
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(8.1.11.v20130520)
+    body:
+      encoding: UTF-8
+      string: "\n<http://localhost:8080/rest/parent> <http://fedora.info/definitions/v4/rest-api#hasAccessRoles>
+        <http://localhost:8080/rest/parent/fcr:accessroles> ;\n\t<http://fedora.info/definitions/v4/rest-api#exportsAs>
+        <http://localhost:8080/rest/parent/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/rest-api#hasVersions>
+        <http://localhost:8080/rest/parent/fcr:versions> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
+        <http://localhost:8080/rest/> ;\n\ta <http://www.w3.org/ns/ldp#Container>
+        , <http://www.w3.org/ns/ldp#DirectContainer> ;\n\t<http://www.w3.org/ns/ldp#membershipResource>
+        <http://localhost:8080/rest/parent> ;\n\t<http://www.w3.org/ns/ldp#hasMemberRelation>
+        <http://fedora.info/definitions/v4/repository#hasChild> ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder>
+        , <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://fedora.info/definitions/v4/rest-api#resource>
+        , <http://fedora.info/definitions/v4/rest-api#object> , <http://fedora.info/definitions/v4/rest-api#relations>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
+        , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
+        , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
+        ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-22T16:42:42.826Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-22T16:42:42.822Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
+        , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
+        \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
+        \"88b13bac-f0ac-40c4-9a94-a3879bf9bb85\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
+        , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://fedora.info/definitions/v4/rest-api#resource> , <http://fedora.info/definitions/v4/rest-api#object>
+        , <http://fedora.info/definitions/v4/rest-api#relations> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://www.jcp.org/jcr/mix/1.0lastModified> , <http://www.jcp.org/jcr/mix/1.0lockable>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
+        , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 16:42:42 GMT
+- request:
+    method: post
+    uri: http://localhost:8080/rest/
+    body:
+      encoding: UTF-8
+      string: ''
+    headers:
+      Content-Type:
+      - text/turtle
+      Prefer:
+      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      Slug:
+      - parent/child
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Etag:
+      - '"60377efc4f6e14a6e42c4ec6fa8f8de1011e1917"'
+      Last-Modified:
+      - Tue, 22 Apr 2014 16:42:42 GMT
+      Location:
+      - http://localhost:8080/rest/parent/child
+      Content-Type:
+      - text/plain
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(8.1.11.v20130520)
+    body:
+      encoding: UTF-8
+      string: http://localhost:8080/rest/parent/child
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 16:42:43 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/rest//parent/child
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle
+      Prefer:
+      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"60377efc4f6e14a6e42c4ec6fa8f8de1011e1917"'
+      Last-Modified:
+      - Tue, 22 Apr 2014 16:42:42 GMT
+      Preference-Applied:
+      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
+      Vary:
+      - Prefer
+      Accept-Patch:
+      - application/sparql-update
+      Link:
+      - http://www.w3.org/ns/ldp#DirectContainer;rel="type"
+      - http://www.w3.org/ns/ldp#Resource;rel="type"
+      Content-Type:
+      - text/turtle
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(8.1.11.v20130520)
+    body:
+      encoding: UTF-8
+      string: "\n<http://localhost:8080/rest/parent/child> <http://fedora.info/definitions/v4/rest-api#hasAccessRoles>
+        <http://localhost:8080/rest/parent/child/fcr:accessroles> ;\n\t<http://fedora.info/definitions/v4/rest-api#exportsAs>
+        <http://localhost:8080/rest/parent/child/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/rest-api#hasVersions>
+        <http://localhost:8080/rest/parent/child/fcr:versions> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
+        <http://localhost:8080/rest/parent> ;\n\ta <http://www.w3.org/ns/ldp#Container>
+        , <http://www.w3.org/ns/ldp#DirectContainer> ;\n\t<http://www.w3.org/ns/ldp#membershipResource>
+        <http://localhost:8080/rest/parent/child> ;\n\t<http://www.w3.org/ns/ldp#hasMemberRelation>
+        <http://fedora.info/definitions/v4/repository#hasChild> ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder>
+        , <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://fedora.info/definitions/v4/rest-api#resource>
+        , <http://fedora.info/definitions/v4/rest-api#object> , <http://fedora.info/definitions/v4/rest-api#relations>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
+        , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
+        , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
+        ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-22T16:42:42.946Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-22T16:42:42.941Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
+        , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
+        \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
+        \"5bbb029d-7890-42f1-8cf6-fecf22d66a4f\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
+        , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://fedora.info/definitions/v4/rest-api#resource> , <http://fedora.info/definitions/v4/rest-api#object>
+        , <http://fedora.info/definitions/v4/rest-api#relations> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://www.jcp.org/jcr/mix/1.0lastModified> , <http://www.jcp.org/jcr/mix/1.0lockable>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
+        , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 16:42:43 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/rest//parent
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle
+      Prefer:
+      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"49c83897987d9134d77fd932f29576213cb7cd33"'
+      Last-Modified:
+      - Tue, 22 Apr 2014 16:42:42 GMT
+      Preference-Applied:
+      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
+      Vary:
+      - Prefer
+      Accept-Patch:
+      - application/sparql-update
+      Link:
+      - http://www.w3.org/ns/ldp#DirectContainer;rel="type"
+      - http://www.w3.org/ns/ldp#Resource;rel="type"
+      Content-Type:
+      - text/turtle
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(8.1.11.v20130520)
+    body:
+      encoding: UTF-8
+      string: "\n<http://localhost:8080/rest/parent> <http://fedora.info/definitions/v4/rest-api#hasAccessRoles>
+        <http://localhost:8080/rest/parent/fcr:accessroles> ;\n\t<http://fedora.info/definitions/v4/rest-api#exportsAs>
+        <http://localhost:8080/rest/parent/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/rest-api#hasVersions>
+        <http://localhost:8080/rest/parent/fcr:versions> ;\n\t<http://fedora.info/definitions/v4/repository#hasChild>
+        <http://localhost:8080/rest/parent/child> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
+        <http://localhost:8080/rest/> ;\n\ta <http://www.w3.org/ns/ldp#Container>
+        , <http://www.w3.org/ns/ldp#DirectContainer> ;\n\t<http://www.w3.org/ns/ldp#membershipResource>
+        <http://localhost:8080/rest/parent> ;\n\t<http://www.w3.org/ns/ldp#hasMemberRelation>
+        <http://fedora.info/definitions/v4/repository#hasChild> ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder>
+        , <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://fedora.info/definitions/v4/rest-api#resource>
+        , <http://fedora.info/definitions/v4/rest-api#object> , <http://fedora.info/definitions/v4/rest-api#relations>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
+        , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
+        , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
+        ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-22T16:42:42.826Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-22T16:42:42.946Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
+        , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
+        \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
+        \"88b13bac-f0ac-40c4-9a94-a3879bf9bb85\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
+        , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://fedora.info/definitions/v4/rest-api#resource> , <http://fedora.info/definitions/v4/rest-api#object>
+        , <http://fedora.info/definitions/v4/rest-api#relations> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://www.jcp.org/jcr/mix/1.0lastModified> , <http://www.jcp.org/jcr/mix/1.0lockable>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
+        , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 16:42:43 GMT
+- request:
+    method: get
+    uri: http://localhost:8080/rest//parent/child
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - text/turtle
+      Prefer:
+      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Etag:
+      - '"60377efc4f6e14a6e42c4ec6fa8f8de1011e1917"'
+      Last-Modified:
+      - Tue, 22 Apr 2014 16:42:42 GMT
+      Preference-Applied:
+      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
+      Vary:
+      - Prefer
+      Accept-Patch:
+      - application/sparql-update
+      Link:
+      - http://www.w3.org/ns/ldp#DirectContainer;rel="type"
+      - http://www.w3.org/ns/ldp#Resource;rel="type"
+      Content-Type:
+      - text/turtle
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(8.1.11.v20130520)
+    body:
+      encoding: UTF-8
+      string: "\n<http://localhost:8080/rest/parent/child> <http://fedora.info/definitions/v4/rest-api#hasAccessRoles>
+        <http://localhost:8080/rest/parent/child/fcr:accessroles> ;\n\t<http://fedora.info/definitions/v4/rest-api#exportsAs>
+        <http://localhost:8080/rest/parent/child/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/rest-api#hasVersions>
+        <http://localhost:8080/rest/parent/child/fcr:versions> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
+        <http://localhost:8080/rest/parent> ;\n\ta <http://www.w3.org/ns/ldp#Container>
+        , <http://www.w3.org/ns/ldp#DirectContainer> ;\n\t<http://www.w3.org/ns/ldp#membershipResource>
+        <http://localhost:8080/rest/parent/child> ;\n\t<http://www.w3.org/ns/ldp#hasMemberRelation>
+        <http://fedora.info/definitions/v4/repository#hasChild> ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder>
+        , <http://www.jcp.org/jcr/nt/1.0hierarchyNode> , <http://www.jcp.org/jcr/nt/1.0base>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://fedora.info/definitions/v4/rest-api#resource>
+        , <http://fedora.info/definitions/v4/rest-api#object> , <http://fedora.info/definitions/v4/rest-api#relations>
+        , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
+        , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
+        , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
+        ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-22T16:42:42.946Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-22T16:42:42.941Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
+        , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
+        \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
+        \"5bbb029d-7890-42f1-8cf6-fecf22d66a4f\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
+        , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://fedora.info/definitions/v4/rest-api#resource> , <http://fedora.info/definitions/v4/rest-api#object>
+        , <http://fedora.info/definitions/v4/rest-api#relations> , <http://www.jcp.org/jcr/mix/1.0created>
+        , <http://www.jcp.org/jcr/mix/1.0lastModified> , <http://www.jcp.org/jcr/mix/1.0lockable>
+        , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
+        , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
+    http_version: 
+  recorded_at: Tue, 22 Apr 2014 16:42:43 GMT
+recorded_with: VCR 2.8.0
