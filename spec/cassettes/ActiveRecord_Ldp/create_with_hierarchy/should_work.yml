@@ -25,9 +25,9 @@ http_interactions:
       message: Created
     headers:
       Etag:
-      - '"0918803f11d1ee0e2750eeac060fd7802552cbcc"'
+      - '"30f1e531c014703b58b4aa953455774e8d899aae"'
       Last-Modified:
-      - Tue, 22 Apr 2014 16:42:42 GMT
+      - Mon, 28 Apr 2014 23:33:38 GMT
       Location:
       - http://localhost:8080/rest/abc/def/ghi
       Content-Type:
@@ -40,7 +40,7 @@ http_interactions:
       encoding: UTF-8
       string: http://localhost:8080/rest/abc/def/ghi
     http_version: 
-  recorded_at: Tue, 22 Apr 2014 16:42:42 GMT
+  recorded_at: Mon, 28 Apr 2014 23:33:38 GMT
 - request:
     method: get
     uri: http://localhost:8080/rest//abc/def/ghi
@@ -62,9 +62,9 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"0918803f11d1ee0e2750eeac060fd7802552cbcc"'
+      - '"30f1e531c014703b58b4aa953455774e8d899aae"'
       Last-Modified:
-      - Tue, 22 Apr 2014 16:42:42 GMT
+      - Mon, 28 Apr 2014 23:33:38 GMT
       Preference-Applied:
       - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
       Vary:
@@ -97,12 +97,12 @@ http_interactions:
         , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
         , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
         ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-22T16:42:42.456Z\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-22T16:42:42.451Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-28T23:33:38.101Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-28T23:33:38.098Z\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
         , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
         \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
-        \"a41feb63-85df-4ec5-b753-c0454ee5ecfe\"^^<http://www.w3.org/2001/XMLSchema#string>
+        \"cf8322bb-9029-4162-910a-73cc380cbe73\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
         , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
@@ -112,5 +112,5 @@ http_interactions:
         , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
         , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
     http_version: 
-  recorded_at: Tue, 22 Apr 2014 16:42:42 GMT
+  recorded_at: Mon, 28 Apr 2014 23:33:38 GMT
 recorded_with: VCR 2.8.0

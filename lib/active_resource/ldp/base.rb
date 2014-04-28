@@ -109,7 +109,14 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   schema do
     attribute 'uuid', :string, predicate: RDF::URI('http://fedora.info/definitions/v4/repository#uuid')
     attribute 'graph', nil
+    attribute 'parent_id', :string, predicate: RDF::URI("http://fedora.info/definitions/v4/repository#hasParent")
+    ## 
+    # the relation for member ids is dynamic and needs to be discovered from the response.
+    # attribute 'member_ids', :string, predicate: RDF::URL("http://www.w3.org/ns/ldp#hasMemberRelation")
   end
+
+  belongs_to_many :members, class_name: "ActiveResource::Ldp::PolymorphicFinder"
+  belongs_to :parent, class_name: "ActiveResource::Ldp::PolymorphicFinder"
 
   protected
   # Create (i.e., \save to the remote service) the \new resource.

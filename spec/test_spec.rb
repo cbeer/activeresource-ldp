@@ -5,20 +5,16 @@ describe "ActiveRecord::Ldp", vcr: true do
   
   before do
     HttpLogger.logger = Logger.new(STDERR) if ENV['DEBUG']
-
+    ActiveResource::Ldp::Base.site = "http://localhost:8080/rest/"
     class SomeModel < ActiveResource::Ldp::Base
       self.site = "http://localhost:8080/rest/"
-      belongs_to :parent, class_name: "SomeModel"
       schema do
         attribute 'title', :string, predicate: RDF::DC.title
-        attribute 'parent_id', :string, predicate: RDF::URI("http://fedora.info/definitions/v4/repository#hasParent")
       end
-      
-      belongs_to_many :members, class_name: "SomeModel"
     end
     
     class FoafModel < ActiveResource::Ldp::Base
-      self.site = "http://localhost:8080/rest/foafs"
+      self.site = "http://localhost:8080/rest/"
       schema_from_vocabulary RDF::FOAF
     end
   end
@@ -35,7 +31,7 @@ describe "ActiveRecord::Ldp", vcr: true do
 
   describe ".exists?" do
     it "should work" do
-      expect(SomeModel.exists?("1")).to be_false
+      expect(SomeModel.exists?("abc1")).to be_false
     end
   end
 
