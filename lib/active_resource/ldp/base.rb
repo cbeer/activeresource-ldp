@@ -109,33 +109,30 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   end
   
   def encode_patch
-    subject = RDF::URI.new 'info:subject'
+    subject = RDF::URI.new nil
+    
+    patterns = changes.map do |k, (was,is)|
+      RDF::Query::Pattern.new(subject, schema[k]['predicate'], k.to_sym).to_s
+    end.join("\n")
     
     query = "DELETE { \n"
-    query +=  RDF::NTriples::Writer.buffer do |writer|
-      changes.each do |k, (was,is)|
-        writer << { subject: subject, predicate: schema[k]['predicate'], object: k.to_sym }
-      end
-    end
-    query += "}\n"
+    query += patterns
+
+    query += "\n}\n"
 
     query += "INSERT { \n"
-    query +=  RDF::NTriples::Writer.buffer do |writer|
-      changes.reject { |k, (was,is)| is.nil? }.each do |k, (was,is)|
-        writer << { subject: subject, predicate: schema[k]['predicate'], object: is }
-      end
-    end
-    query += "}\n"
+    query += 
+      changes.reject { |k, (was,is)| is.nil? }.map do |k, (was,is)|
+        RDF::Query::Pattern.new(subject: subject, predicate: schema[k]['predicate'], object: is).to_s
+      end.join("\n")
+
+    query += "\n}\n"
 
     query += "WHERE { \n"
-    query +=  RDF::NTriples::Writer.buffer do |writer|
-      changes.each do |k, (was,is)|
-        writer << { subject: subject, predicate: schema[k]['predicate'], object: k.to_sym }
-      end
-    end
-    query += "}"
+    query += patterns
+    query += "\n}"
     
-    query.gsub(subject.to_s, "").gsub("_:", "?")
+    query
   end
   
   schema do
