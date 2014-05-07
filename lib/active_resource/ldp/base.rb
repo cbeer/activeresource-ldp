@@ -98,17 +98,44 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   end
   
   def encode options = {}
-    #if options[:only]
-    #else
-      graph = RDF::Graph.new
-      
-      attributes.except(:id, :graph).each do |k,v|
-        Array(v).each do |val|
-          graph << [RDF::URI(''), schema[k]['predicate'], val]
-        end
+    graph = RDF::Graph.new
+    
+    attributes.except(:id, :graph).each do |k,v|
+      Array(v).each do |val|
+        graph << [RDF::URI(''), schema[k]['predicate'], val]
       end
-      graph.dump(:ttl)
-  #  end
+    end
+    graph.dump(:ttl)
+  end
+  
+  def encode_patch
+    subject = RDF::URI.new 'info:subject'
+    
+    query = "DELETE { \n"
+    query +=  RDF::NTriples::Writer.buffer do |writer|
+      changes.each do |k, (was,is)|
+        writer << { subject: subject, predicate: schema[k]['predicate'], object: k.to_sym }
+      end
+    end
+    query += "}\n"
+
+    query += "INSERT { \n"
+    query +=  RDF::NTriples::Writer.buffer do |writer|
+      changes.reject { |k, (was,is)| is.nil? }.each do |k, (was,is)|
+        writer << { subject: subject, predicate: schema[k]['predicate'], object: is }
+      end
+    end
+    query += "}\n"
+
+    query += "WHERE { \n"
+    query +=  RDF::NTriples::Writer.buffer do |writer|
+      changes.each do |k, (was,is)|
+        writer << { subject: subject, predicate: schema[k]['predicate'], object: k.to_sym }
+      end
+    end
+    query += "}"
+    
+    query.gsub(subject.to_s, "").gsub("_:", "?")
   end
   
   schema do
@@ -127,9 +154,18 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   # Create (i.e., \save to the remote service) the \new resource.
   def create
     run_callbacks :create do
-      connection.post(collection_path, encode, self.class.headers.merge(instance_headers)).tap do |response|
+      connection.post(collection_path, encode, self.class.headers.merge(instance_create_headers)).tap do |response|
         self.id = URI.parse(response['Location']).to_s
         load_attributes_from_response(response)
+      end
+    end
+  end
+  
+  # Update the resource on the remote service.
+  def update
+    run_callbacks :update do
+      if changed_attributes.present?
+        connection.patch(element_path(prefix_options), encode_patch, self.class.headers.merge("Content-Type" => "application/sparql-update"))
       end
     end
   end
@@ -150,7 +186,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     self.class.send(:fetch_and_decode, *args)
   end
   
-  def instance_headers
+  def instance_create_headers
     h = { }
     h['Slug'] = slug if slug
     h
