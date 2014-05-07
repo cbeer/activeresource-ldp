@@ -58,7 +58,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     end
     
     def headers
-      super.merge({ "Prefer" => "return=representation; omit=\"#{::Ldp.prefer_containment}\""})
+      super.merge({ "Prefer" => "return=representation; include=\"http://fedora.info/definitions/v4/repository#InboundReferences\"; omit=\"#{::Ldp.prefer_containment}\""})
     end
     
     def element_path(id, prefix_options = {}, query_options = nil)
@@ -66,7 +66,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
       check_prefix_options(prefix_options)
 
       prefix_options, query_options = split_options(prefix_options) if query_options.nil?
-      "#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape real_id.to_s}#{format_extension}#{query_string(query_options)}"
+      "#{prefix(prefix_options)}#{collection_name}/#{URI.parser.escape real_id.to_s}#{format_extension}#{query_string(query_options)}".gsub(/\/+/, '/')
     end
 
     # Find every resource
@@ -89,6 +89,11 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
         # ActiveRecord.
         nil
       end
+    end
+    
+    def fetch_and_decode path, headers
+      response = connection.get(path, headers)
+      format.decode(response.body, response, path)
     end
   end
   
@@ -123,11 +128,26 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   def create
     run_callbacks :create do
       connection.post(collection_path, encode, self.class.headers.merge(instance_headers)).tap do |response|
-        self.id = response['Location'].sub(self.class.site.to_s, "")
-        get_response = connection.get(self.class.element_path(self.id), self.class.headers)
-        load_attributes_from_response(get_response)
+        self.id = URI.parse(response['Location']).to_s
+        load_attributes_from_response(response)
       end
     end
+  end
+  
+  def load_attributes_from_response response
+    if (response_code_allows_body?(response.code) && response['Location'].blank? &&
+        (response['Content-Length'].nil? || response['Content-Length'] != "0") &&
+        !response.body.nil? && response.body.strip.size > 0)
+      load(self.class.format.decode(response.body), true, true)
+      @persisted = true
+    elsif response['Location']
+      load(fetch_and_decode(self.class.element_path(response['Location'].sub(self.class.site.to_s, "")), self.class.headers), true, true)
+      @persisted = true
+    end
+  end
+  
+  def fetch_and_decode *args
+    self.class.send(:fetch_and_decode, *args)
   end
   
   def instance_headers

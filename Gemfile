@@ -5,4 +5,4 @@ gemspec
 
 gem 'ldp', github: 'cbeer/ldp'
 gem 'byebug'
-gem 'activeresource', path: '../activeresource'
+gem 'activeresource', github: 'cbeer/activeresource', branch: 'fetch_and_decode'

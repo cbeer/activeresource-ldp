@@ -5,6 +5,7 @@ describe "ActiveRecord::Ldp", vcr: true do
   
   before do
     HttpLogger.logger = Logger.new(STDERR) if ENV['DEBUG']
+    HttpLogger.log_headers = true
     ActiveResource::Ldp::Base.site = "http://localhost:8080/rest/"
     class SomeModel < ActiveResource::Ldp::Base
       self.site = "http://localhost:8080/rest/"
@@ -19,12 +20,12 @@ describe "ActiveRecord::Ldp", vcr: true do
     end
   end
   
-  after(:all) do
+  after :all do
     SomeModel.delete 'xyz' rescue nil
     SomeModel.delete 'xyz1' rescue nil
     SomeModel.delete 'xyz2' rescue nil
     SomeModel.delete 'abc/def/ghi' rescue nil
-    SomeModel.delete 'a/b/c' rescue nil
+    SomeModel.delete 'a' rescue nil
     SomeModel.delete 'foafs' rescue nil
     SomeModel.delete 'parent' rescue nil
   end
@@ -71,7 +72,7 @@ describe "ActiveRecord::Ldp", vcr: true do
     it "should work" do
       m = SomeModel.new(id: 'abc/def/ghi')
       m.save!
-      expect(m.id).to eq 'abc/def/ghi'
+      expect(URI.parse(m.id).path).to end_with 'abc/def/ghi'
     end
   end
   
@@ -80,7 +81,7 @@ describe "ActiveRecord::Ldp", vcr: true do
       m = SomeModel.new(id: 'a/b/c')
       m.save!
       expect(m.parent).to_not be_blank
-      expect(m.parent).to eq SomeModel.find('a/b')
+      expect(URI.parse(m.parent.id).path).to end_with '/a/b'
     end
   end
   
@@ -117,6 +118,12 @@ describe "ActiveRecord::Ldp", vcr: true do
       m = SomeModel.find('/')
       expect(m.members).to_not be_blank
       expect(m.members.first).to be_a_kind_of(SomeModel)
+    end
+  end
+  
+  describe "with binary content" do
+    it "should work" do
+      
     end
   end
   

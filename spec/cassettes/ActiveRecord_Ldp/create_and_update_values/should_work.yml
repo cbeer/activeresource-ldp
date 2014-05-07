@@ -12,7 +12,8 @@ http_interactions:
       Content-Type:
       - text/turtle
       Prefer:
-      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      - return=representation; include="http://fedora.info/definitions/v4/repository#InboundReferences";
+        omit="http://www.w3.org/ns/ldp#PreferContainment"
       Slug:
       - xyz2
       Accept-Encoding:
@@ -27,9 +28,9 @@ http_interactions:
       message: Created
     headers:
       Etag:
-      - '"699c94af2c91c1a7c194ecd7120f06b9997b5243"'
+      - '"8233efa3ae8aed9ad6cb30495dd4390a05405685"'
       Last-Modified:
-      - Mon, 28 Apr 2014 23:33:37 GMT
+      - Wed, 07 May 2014 21:32:39 GMT
       Location:
       - http://localhost:8080/rest/xyz2
       Content-Type:
@@ -42,10 +43,10 @@ http_interactions:
       encoding: UTF-8
       string: http://localhost:8080/rest/xyz2
     http_version: 
-  recorded_at: Mon, 28 Apr 2014 23:33:37 GMT
+  recorded_at: Wed, 07 May 2014 21:32:40 GMT
 - request:
     method: get
-    uri: http://localhost:8080/rest//xyz2
+    uri: http://localhost:8080/rest/xyz2
     body:
       encoding: US-ASCII
       string: ''
@@ -53,7 +54,8 @@ http_interactions:
       Accept:
       - text/turtle
       Prefer:
-      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      - return=representation; include="http://fedora.info/definitions/v4/repository#InboundReferences";
+        omit="http://www.w3.org/ns/ldp#PreferContainment"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       User-Agent:
@@ -64,18 +66,23 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"699c94af2c91c1a7c194ecd7120f06b9997b5243"'
+      - '"8233efa3ae8aed9ad6cb30495dd4390a05405685"'
       Last-Modified:
-      - Mon, 28 Apr 2014 23:33:37 GMT
+      - Wed, 07 May 2014 21:32:39 GMT
       Preference-Applied:
-      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
+      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership
+        http://fedora.info/definitions/v4/repository#InboundReferences"
       Vary:
       - Prefer
       Accept-Patch:
       - application/sparql-update
+      Allow:
+      - MOVE,COPY,DELETE,POST,HEAD,GET,PUT,PATCH,OPTIONS
+      Accept-Post:
+      - text/turtle,text/rdf+n3,application/n3,text/n3,application/rdf+xml,application/n-triples,multipart/form-data,application/sparql-update
       Link:
-      - http://www.w3.org/ns/ldp#DirectContainer;rel="type"
-      - http://www.w3.org/ns/ldp#Resource;rel="type"
+      - <http://www.w3.org/ns/ldp#DirectContainer>;rel="type"
+      - <http://www.w3.org/ns/ldp#Resource>;rel="type"
       Content-Type:
       - text/turtle
       Transfer-Encoding:
@@ -86,8 +93,7 @@ http_interactions:
       encoding: UTF-8
       string: "\n<http://localhost:8080/rest/xyz2> <http://fedora.info/definitions/v4/rest-api#hasAccessRoles>
         <http://localhost:8080/rest/xyz2/fcr:accessroles> ;\n\t<http://fedora.info/definitions/v4/rest-api#exportsAs>
-        <http://localhost:8080/rest/xyz2/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/rest-api#hasVersions>
-        <http://localhost:8080/rest/xyz2/fcr:versions> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
+        <http://localhost:8080/rest/xyz2/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
         <http://localhost:8080/rest/> ;\n\ta <http://www.w3.org/ns/ldp#Container>
         , <http://www.w3.org/ns/ldp#DirectContainer> ;\n\t<http://www.w3.org/ns/ldp#membershipResource>
         <http://localhost:8080/rest/xyz2> ;\n\t<http://www.w3.org/ns/ldp#hasMemberRelation>
@@ -99,13 +105,13 @@ http_interactions:
         , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
         , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
         ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-28T23:33:37.914Z\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-28T23:33:37.91Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-05-07T21:32:40.003Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-05-07T21:32:39.998Z\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
         , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/title>
         \"some title\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
         \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
-        \"ce9f094b-f240-4623-9ab9-d353b04b94b8\"^^<http://www.w3.org/2001/XMLSchema#string>
+        \"b927cc7a-64e4-44d4-a140-e25c5962684d\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
         , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
@@ -115,22 +121,97 @@ http_interactions:
         , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
         , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
     http_version: 
-  recorded_at: Mon, 28 Apr 2014 23:33:37 GMT
+  recorded_at: Wed, 07 May 2014 21:32:40 GMT
 - request:
     method: put
-    uri: http://localhost:8080/rest//xyz2
+    uri: http://localhost:8080/rest/xyz2
     body:
       encoding: UTF-8
       string: |2
 
-        <> <http://fedora.info/definitions/v4/repository#hasParent> <http://localhost:8080/rest/>;
-           <http://fedora.info/definitions/v4/repository#uuid> "ce9f094b-f240-4623-9ab9-d353b04b94b8";
-           <http://xmlns.com/foaf/0.1/title> "a new title" .
+        <> <http://fedora.info/definitions/v4/repository#hasParent> "http://localhost:8080/rest/";
+           <http://fedora.info/definitions/v4/repository#uuid> "b927cc7a-64e4-44d4-a140-e25c5962684d";
+           <http://xmlns.com/foaf/0.1/Agent> "";
+           <http://xmlns.com/foaf/0.1/Document> "";
+           <http://xmlns.com/foaf/0.1/Group> "";
+           <http://xmlns.com/foaf/0.1/Image> "";
+           <http://xmlns.com/foaf/0.1/LabelProperty> "";
+           <http://xmlns.com/foaf/0.1/OnlineAccount> "";
+           <http://xmlns.com/foaf/0.1/OnlineChatAccount> "";
+           <http://xmlns.com/foaf/0.1/OnlineEcommerceAccount> "";
+           <http://xmlns.com/foaf/0.1/OnlineGamingAccount> "";
+           <http://xmlns.com/foaf/0.1/Organization> "";
+           <http://xmlns.com/foaf/0.1/Person> "";
+           <http://xmlns.com/foaf/0.1/PersonalProfileDocument> "";
+           <http://xmlns.com/foaf/0.1/Project> "";
+           <http://xmlns.com/foaf/0.1/account> "";
+           <http://xmlns.com/foaf/0.1/accountName> "";
+           <http://xmlns.com/foaf/0.1/accountServiceHomepage> "";
+           <http://xmlns.com/foaf/0.1/age> "";
+           <http://xmlns.com/foaf/0.1/aimChatID> "";
+           <http://xmlns.com/foaf/0.1/based_near> "";
+           <http://xmlns.com/foaf/0.1/birthday> "";
+           <http://xmlns.com/foaf/0.1/currentProject> "";
+           <http://xmlns.com/foaf/0.1/depiction> "";
+           <http://xmlns.com/foaf/0.1/depicts> "";
+           <http://xmlns.com/foaf/0.1/dnaChecksum> "";
+           <http://xmlns.com/foaf/0.1/familyName> "";
+           <http://xmlns.com/foaf/0.1/family_name> "";
+           <http://xmlns.com/foaf/0.1/firstName> "";
+           <http://xmlns.com/foaf/0.1/focus> "";
+           <http://xmlns.com/foaf/0.1/fundedBy> "";
+           <http://xmlns.com/foaf/0.1/geekcode> "";
+           <http://xmlns.com/foaf/0.1/gender> "";
+           <http://xmlns.com/foaf/0.1/givenName> "";
+           <http://xmlns.com/foaf/0.1/givenname> "";
+           <http://xmlns.com/foaf/0.1/holdsAccount> "";
+           <http://xmlns.com/foaf/0.1/homepage> "";
+           <http://xmlns.com/foaf/0.1/icqChatID> "";
+           <http://xmlns.com/foaf/0.1/img> "";
+           <http://xmlns.com/foaf/0.1/interest> "";
+           <http://xmlns.com/foaf/0.1/isPrimaryTopicOf> "";
+           <http://xmlns.com/foaf/0.1/jabberID> "";
+           <http://xmlns.com/foaf/0.1/knows> "";
+           <http://xmlns.com/foaf/0.1/lastName> "";
+           <http://xmlns.com/foaf/0.1/logo> "";
+           <http://xmlns.com/foaf/0.1/made> "";
+           <http://xmlns.com/foaf/0.1/maker> "";
+           <http://xmlns.com/foaf/0.1/mbox> "";
+           <http://xmlns.com/foaf/0.1/mbox_sha1sum> "";
+           <http://xmlns.com/foaf/0.1/member> "";
+           <http://xmlns.com/foaf/0.1/membershipClass> "";
+           <http://xmlns.com/foaf/0.1/msnChatID> "";
+           <http://xmlns.com/foaf/0.1/myersBriggs> "";
+           <http://xmlns.com/foaf/0.1/name> "";
+           <http://xmlns.com/foaf/0.1/nick> "";
+           <http://xmlns.com/foaf/0.1/openid> "";
+           <http://xmlns.com/foaf/0.1/page> "";
+           <http://xmlns.com/foaf/0.1/pastProject> "";
+           <http://xmlns.com/foaf/0.1/phone> "";
+           <http://xmlns.com/foaf/0.1/plan> "";
+           <http://xmlns.com/foaf/0.1/primaryTopic> "";
+           <http://xmlns.com/foaf/0.1/publications> "";
+           <http://xmlns.com/foaf/0.1/schoolHomepage> "";
+           <http://xmlns.com/foaf/0.1/sha1> "";
+           <http://xmlns.com/foaf/0.1/skypeID> "";
+           <http://xmlns.com/foaf/0.1/status> "";
+           <http://xmlns.com/foaf/0.1/surname> "";
+           <http://xmlns.com/foaf/0.1/theme> "";
+           <http://xmlns.com/foaf/0.1/thumbnail> "";
+           <http://xmlns.com/foaf/0.1/tipjar> "";
+           <http://xmlns.com/foaf/0.1/title> "a new title";
+           <http://xmlns.com/foaf/0.1/topic> "";
+           <http://xmlns.com/foaf/0.1/topic_interest> "";
+           <http://xmlns.com/foaf/0.1/weblog> "";
+           <http://xmlns.com/foaf/0.1/workInfoHomepage> "";
+           <http://xmlns.com/foaf/0.1/workplaceHomepage> "";
+           <http://xmlns.com/foaf/0.1/yahooChatID> "" .
     headers:
       Content-Type:
       - text/turtle
       Prefer:
-      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      - return=representation; include="http://fedora.info/definitions/v4/repository#InboundReferences";
+        omit="http://www.w3.org/ns/ldp#PreferContainment"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -143,19 +224,19 @@ http_interactions:
       message: No Content
     headers:
       Etag:
-      - '"699c94af2c91c1a7c194ecd7120f06b9997b5243"'
+      - '"73b0f02bd25b5728909b93de92122aa2659af84a"'
       Last-Modified:
-      - Mon, 28 Apr 2014 23:33:37 GMT
+      - Wed, 07 May 2014 21:32:40 GMT
       Server:
       - Jetty(8.1.11.v20130520)
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 28 Apr 2014 23:33:38 GMT
+  recorded_at: Wed, 07 May 2014 21:32:40 GMT
 - request:
     method: get
-    uri: http://localhost:8080/rest//xyz2
+    uri: http://localhost:8080/rest/xyz2
     body:
       encoding: US-ASCII
       string: ''
@@ -163,7 +244,8 @@ http_interactions:
       Accept:
       - text/turtle
       Prefer:
-      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      - return=representation; include="http://fedora.info/definitions/v4/repository#InboundReferences";
+        omit="http://www.w3.org/ns/ldp#PreferContainment"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       User-Agent:
@@ -174,18 +256,23 @@ http_interactions:
       message: OK
     headers:
       Etag:
-      - '"699c94af2c91c1a7c194ecd7120f06b9997b5243"'
+      - '"73b0f02bd25b5728909b93de92122aa2659af84a"'
       Last-Modified:
-      - Mon, 28 Apr 2014 23:33:37 GMT
+      - Wed, 07 May 2014 21:32:40 GMT
       Preference-Applied:
-      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership"
+      - return=representation; include="http://www.w3.org/ns/ldp#PreferMembership
+        http://fedora.info/definitions/v4/repository#InboundReferences"
       Vary:
       - Prefer
       Accept-Patch:
       - application/sparql-update
+      Allow:
+      - MOVE,COPY,DELETE,POST,HEAD,GET,PUT,PATCH,OPTIONS
+      Accept-Post:
+      - text/turtle,text/rdf+n3,application/n3,text/n3,application/rdf+xml,application/n-triples,multipart/form-data,application/sparql-update
       Link:
-      - http://www.w3.org/ns/ldp#DirectContainer;rel="type"
-      - http://www.w3.org/ns/ldp#Resource;rel="type"
+      - <http://www.w3.org/ns/ldp#DirectContainer>;rel="type"
+      - <http://www.w3.org/ns/ldp#Resource>;rel="type"
       Content-Type:
       - text/turtle
       Transfer-Encoding:
@@ -196,8 +283,7 @@ http_interactions:
       encoding: UTF-8
       string: "\n<http://localhost:8080/rest/xyz2> <http://fedora.info/definitions/v4/rest-api#hasAccessRoles>
         <http://localhost:8080/rest/xyz2/fcr:accessroles> ;\n\t<http://fedora.info/definitions/v4/rest-api#exportsAs>
-        <http://localhost:8080/rest/xyz2/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/rest-api#hasVersions>
-        <http://localhost:8080/rest/xyz2/fcr:versions> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
+        <http://localhost:8080/rest/xyz2/fcr:export?format=jcr/xml> ;\n\t<http://fedora.info/definitions/v4/repository#hasParent>
         <http://localhost:8080/rest/> ;\n\ta <http://www.w3.org/ns/ldp#Container>
         , <http://www.w3.org/ns/ldp#DirectContainer> ;\n\t<http://www.w3.org/ns/ldp#membershipResource>
         <http://localhost:8080/rest/xyz2> ;\n\t<http://www.w3.org/ns/ldp#hasMemberRelation>
@@ -208,15 +294,89 @@ http_interactions:
         , <http://www.jcp.org/jcr/mix/1.0created> , <http://www.jcp.org/jcr/mix/1.0lastModified>
         , <http://www.jcp.org/jcr/mix/1.0lockable> , <http://www.jcp.org/jcr/mix/1.0referenceable>
         , <http://purl.org/dc/elements/1.1/describable> , <http://fedora.info/definitions/v4/rest-api#resource>
+        ;\n\t<http://xmlns.com/foaf/0.1/phone> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#primaryType> \"nt:folder\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-04-28T23:33:37.914Z\"^^<http://www.w3.org/2001/XMLSchema#string>
-        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-04-28T23:33:37.996Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/OnlineEcommerceAccount> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/accountName> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/tipjar> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/Document> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/topic_interest> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/pastProject> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/currentProject> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/workplaceHomepage> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/focus> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/family_name> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/OnlineChatAccount> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/sha1> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/status> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/icqChatID> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/member> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/theme> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/familyName> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/isPrimaryTopicOf> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#created> \"2014-05-07T21:32:40.003Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/msnChatID> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/schoolHomepage> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/knows> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/gender> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/page> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/Group> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/primaryTopic> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://fedora.info/definitions/v4/repository#lastModified> \"2014-05-07T21:32:40.178Z\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/openid> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/jabberID> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/age> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/Agent> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/nick> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/weblog> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/based_near> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/dnaChecksum> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/mbox> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/Person> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/accountServiceHomepage> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/OnlineAccount> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/PersonalProfileDocument> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/LabelProperty> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/thumbnail> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/depiction> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/birthday> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/Project> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/mbox_sha1sum> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/name> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/maker> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#mixinTypes> \"fedora:resource\"^^<http://www.w3.org/2001/XMLSchema#string>
-        , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/title>
-        \"a new title\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
-        \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
-        \"ce9f094b-f240-4623-9ab9-d353b04b94b8\"^^<http://www.w3.org/2001/XMLSchema#string>
+        , \"fedora:object\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/yahooChatID>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/depicts>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/made>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/topic>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/lastName>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/givenname>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/givenName>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/surname>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/membershipClass>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/Organization>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/title>
+        \"a new title\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/aimChatID>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#lastModifiedBy>
+        \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/publications>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/OnlineGamingAccount>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://xmlns.com/foaf/0.1/account>
+        \"\"^^<http://www.w3.org/2001/XMLSchema#string> ;\n\t<http://fedora.info/definitions/v4/repository#uuid>
+        \"b927cc7a-64e4-44d4-a140-e25c5962684d\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/logo> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/Image> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/myersBriggs> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/geekcode> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\t<http://fedora.info/definitions/v4/repository#createdBy> \"bypassAdmin\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/fundedBy> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/firstName> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/workInfoHomepage> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/homepage> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/img> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/skypeID> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/holdsAccount> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/plan> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
+        ;\n\t<http://xmlns.com/foaf/0.1/interest> \"\"^^<http://www.w3.org/2001/XMLSchema#string>
         ;\n\ta <http://www.jcp.org/jcr/nt/1.0folder> , <http://www.jcp.org/jcr/nt/1.0hierarchyNode>
         , <http://www.jcp.org/jcr/nt/1.0base> , <http://www.jcp.org/jcr/mix/1.0created>
         , <http://fedora.info/definitions/v4/rest-api#resource> , <http://fedora.info/definitions/v4/rest-api#object>
@@ -225,5 +385,5 @@ http_interactions:
         , <http://www.jcp.org/jcr/mix/1.0referenceable> , <http://purl.org/dc/elements/1.1/describable>
         , <http://fedora.info/definitions/v4/rest-api#resource> .\n"
     http_version: 
-  recorded_at: Mon, 28 Apr 2014 23:33:38 GMT
+  recorded_at: Wed, 07 May 2014 21:32:40 GMT
 recorded_with: VCR 2.8.0

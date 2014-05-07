@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: head
-    uri: http://localhost:8080/rest//abc1
+    uri: http://localhost:8080/rest/abc1
     body:
       encoding: US-ASCII
       string: ''
@@ -10,7 +10,8 @@ http_interactions:
       Accept:
       - text/turtle
       Prefer:
-      - return=representation; omit="http://www.w3.org/ns/ldp#PreferContainment"
+      - return=representation; include="http://fedora.info/definitions/v4/repository#InboundReferences";
+        omit="http://www.w3.org/ns/ldp#PreferContainment"
       User-Agent:
       - Ruby
   response:
@@ -23,12 +24,12 @@ http_interactions:
       Cache-Control:
       - must-revalidate,no-cache,no-store
       Content-Length:
-      - '1375'
+      - '1374'
       Server:
       - Jetty(8.1.11.v20130520)
     body:
       encoding: UTF-8
       string: ''
     http_version: 
-  recorded_at: Mon, 28 Apr 2014 23:33:37 GMT
+  recorded_at: Wed, 07 May 2014 21:32:39 GMT
 recorded_with: VCR 2.8.0

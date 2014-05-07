@@ -13,16 +13,21 @@ class ActiveResource::Formats::TurtleFormat
     "text/turtle"
   end
 
-  def decode(ttl)
+  def decode(ttl, headers = nil, path = nil)
     graph = RDF::Graph.new
     graph.from_ttl(ttl)
 
     h = {}
+
+    subject = graph.subjects.select { |x| x.path == path }.first
+    h[:id] = subject.to_s
     model.schema.each do |k, v|
-      h[k] = graph.query(predicate: v['predicate']).map { |x| x.object }.first
+      h[k] = graph.query(subject: subject, predicate: v['predicate']).map do |x|
+        x.object
+      end.first.to_s
     end
     
-    h[:member_ids] = members(graph)
+    h[:member_ids] = members(subject, graph)
 
     h[:graph] = graph
     
@@ -30,9 +35,14 @@ class ActiveResource::Formats::TurtleFormat
   end
   
   private
-  def members graph
-      graph.query(predicate: 
-          graph.query(predicate: RDF::URI("http://www.w3.org/ns/ldp#hasMemberRelation")).map { |x| x.object }.first
-      ).map { |x| x.object.to_s }
+  def members subject, graph
+    return enum_for(:members, subject, graph) unless block_given?
+    graph.query(subject: subject,  predicate: member_predicate(subject, graph)).map do |x| 
+      yield x.object.to_s
+    end
+  end
+  
+  def member_predicate subject, graph
+    graph.query(subject: subject, predicate: RDF::URI("http://www.w3.org/ns/ldp#hasMemberRelation")).map { |x| x.object }.first
   end
 end
