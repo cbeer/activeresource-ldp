@@ -4,9 +4,10 @@ class ActiveResource::Formats::IdentityFormat
   end
 
   def self.mime_type
+    "*/*"
   end
 
-  def decode(content)
+  def self.decode(content, response, path)
     h[:content] = content
   end
 end

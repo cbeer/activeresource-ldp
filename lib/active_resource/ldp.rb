@@ -10,5 +10,6 @@ module ActiveResource
     require "active_resource/ldp/base"
     require "active_resource/formats/identity_format"
     require "active_resource/formats/turtle_format"
+    require "active_resource/ldp/binary"
   end
 end

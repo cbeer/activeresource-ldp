@@ -1,4 +1,4 @@
-class ActiveResource::Ldp::Binary < Activeresource::Ldp::Base
+class ActiveResource::Ldp::Binary < ActiveResource::Ldp::Base
   def encode
     content
   end
@@ -7,7 +7,12 @@ class ActiveResource::Ldp::Binary < Activeresource::Ldp::Base
     self._format || ActiveResource::Formats::IdentityFormat || super
   end
   
+  def self.format
+    ActiveResource::Formats::IdentityFormat
+  end
+
   schema do
     attribute 'content', nil
+    attribute "mimeType", :string
   end
 end
