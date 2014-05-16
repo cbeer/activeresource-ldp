@@ -18,6 +18,10 @@ describe "ActiveRecord::Ldp", vcr: true do
       self.site = "http://localhost:8080/rest/"
       schema_from_vocabulary RDF::FOAF
     end
+    
+    class ModelWithDatastream < ActiveResource::Ldp::Base
+      has_child 'abc', class_name: 'SomeModel'
+    end
   end
   
   after :all do
@@ -28,6 +32,17 @@ describe "ActiveRecord::Ldp", vcr: true do
     SomeModel.delete 'a' rescue nil
     SomeModel.delete 'foafs' rescue nil
     SomeModel.delete 'parent' rescue nil
+  end
+  
+  describe "has_child" do
+    it "should work" do
+      m = ModelWithDatastream.new
+      
+      x = m.abc
+      m.abc.title = "xyz"
+      raise m.abc.attributes.inspect
+      expect(x).to be_a_kind_of SomeModel
+    end
   end
 
   describe ".exists?" do
