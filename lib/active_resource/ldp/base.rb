@@ -101,8 +101,17 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     graph = RDF::Graph.new
     
     attributes.except(:id, :graph).each do |k,v|
-      Array(v).each do |val|
-        graph << [RDF::URI(''), schema[k]['predicate'], val]
+      Array.wrap(v).each do |val|
+        next unless schema[k]
+        
+        obj = case schema[k]['type']
+        when 'uri'
+          RDF::URI(val)
+        else
+          RDF::Literal(val)
+        end
+
+        graph << [RDF::URI(''), schema[k]['predicate'], obj]
       end
     end
     graph.dump(:ttl)
@@ -120,18 +129,30 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
 
     query += "\n}\n"
 
+    query += "WHERE { \n"
+    query += patterns
+    query += "\n} ;"
+    
     query += "INSERT { \n"
     query += 
       changes.reject { |k, (was,is)| is.nil? }.map do |k, (was,is)|
-        RDF::Query::Pattern.new(subject: subject, predicate: schema[k]['predicate'], object: is).to_s
+        
+        obj = case schema[k]['type']
+        when 'uri'
+          if URI(is).relative?
+            RDF::URI(self.class.site + is)
+          else
+            RDF::URI(is)
+          end
+        else
+          RDF::Literal(val)
+        end
+        
+        RDF::Query::Pattern.new(subject: subject, predicate: schema[k]['predicate'], object: obj).to_s
       end.join("\n")
 
-    query += "\n}\n"
+    query += "\n}\n WHERE { }"
 
-    query += "WHERE { \n"
-    query += patterns
-    query += "\n}"
-    
     query
   end
   
@@ -152,7 +173,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   def create
     run_callbacks :create do
       connection.post(collection_path, encode, self.class.headers.merge(instance_create_headers)).tap do |response|
-        self.id = URI.parse(response['Location']).to_s
+        self.id = response['Location'].sub(self.class.site.to_s, "")
         load_attributes_from_response(response)
       end
     end
@@ -162,7 +183,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
   def update
     run_callbacks :update do
       if changed_attributes.present?
-        connection.patch(element_path(prefix_options), encode_patch, self.class.headers.merge("Content-Type" => "application/sparql-update"))
+        connection.patch(element_path(prefix_options), encode_patch, self.class.headers.merge("Content-Type" => "application/sparql-update"))    
       end
     end
   end
@@ -174,7 +195,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
       load(self.class.format.decode(response.body), true, true)
       @persisted = true
     elsif response['Location']
-      load(fetch_and_decode(self.class.element_path(response['Location'].sub(self.class.site.to_s, "")), self.class.headers), true, true)
+      load(fetch_and_decode(URI.parse(response['Location']).path, self.class.headers), true, true)
       @persisted = true
     end
   end
@@ -187,6 +208,10 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     h = { }
     h['Slug'] = slug if slug
     h
+  end
+  
+  def id
+    attributes['id'].sub(self.class.site.to_s, "")
   end
   
   def slug
