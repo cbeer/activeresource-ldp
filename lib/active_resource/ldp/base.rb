@@ -30,7 +30,7 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     
     def schema_from_vocabulary vocab
       vocab.public_methods(false).
-            select { |x| vocab.properties.include?((vocab.send(x) rescue nil)) }.
+            select { |x| (vocab.send(x) rescue nil).is_a? RDF::URI }.
             each do |k|
         schema[k] = { type: nil, predicate: vocab.send(k) }      
       end
