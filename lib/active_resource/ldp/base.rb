@@ -97,8 +97,11 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
     end
   end
   
+  def graph_to_encode
+    @graph_to_encode ||= RDF::Graph.new
+  end
+  
   def encode options = {}
-    graph = RDF::Graph.new
     
     attributes.except(:id, :graph).each do |k,v|
       Array.wrap(v).each do |val|
@@ -111,10 +114,10 @@ class ActiveResource::Ldp::Base < ActiveResource::Base
           RDF::Literal(val)
         end
 
-        graph << [RDF::URI(''), schema[k]['predicate'], obj]
+        graph_to_encode << [RDF::URI(''), schema[k]['predicate'], obj]
       end
     end
-    graph.dump(:ttl)
+    graph_to_encode.dump(:ttl)
   end
   
   def encode_patch
